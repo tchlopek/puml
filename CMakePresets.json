@@ -1,0 +1,121 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base-cfg",
+      "displayName": "OS-independent base configuration",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/install/${presetName}",
+      "cacheVariables": {
+        "BUILD_EXAMPLE": "ON",
+        "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CPM_SOURCE_CACHE": "${sourceDir}/build/.deps-cache"
+      }
+    },
+    {
+      "name": "linux-cfg",
+      "description": "Target Linux",
+      "hidden": true,
+      "inherits": "base-cfg",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "debug-cfg",
+      "description": "Debug Base Configuration",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release-cfg",
+      "description": "Release Base Configuration",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "linux-cfg-debug",
+      "displayName": "Linux Debug",
+      "description": "Linux Debug",
+      "inherits": ["linux-cfg", "debug-cfg"]
+    },
+    {
+      "name": "linux-cfg-release",
+      "displayName": "Linux Release",
+      "description": "Linux Release",
+      "inherits": ["linux-cfg", "release-cfg"]
+    },
+    {
+      "name": "linux-cfg-test",
+      "displayName": "Linux Test Config",
+      "description": "Linux test configuration",
+      "inherits": "linux-cfg-debug",
+      "cacheVariables": {
+        "BUILD_TEST": "ON",
+        "BUILD_EXAMPLE": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-build-base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "hidden": true
+    },
+    {
+      "name": "linux-build-debug",
+      "displayName": "Puml Debug Build",
+      "configurePreset": "linux-cfg-debug",
+      "configuration": "Debug",
+      "inherits": "linux-build-base"
+    },
+    {
+      "name": "linux-build-release",
+      "displayName": "Puml Release Build",
+      "configurePreset": "linux-cfg-release",
+      "configuration": "Release",
+      "inherits": "linux-build-base"
+    },
+    {
+      "name": "linux-build-test",
+      "displayName": "Puml Test Build",
+      "configurePreset": "linux-cfg-test",
+      "configuration": "Debug",
+      "inherits": "linux-build-base"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-test-base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "hidden": true
+    },
+    {
+      "name": "linux-test",
+      "configurePreset": "linux-cfg-test",
+      "displayName": "Puml tests",
+      "inherits": "linux-test-base"
+    }
+  ]
+}
