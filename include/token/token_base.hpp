@@ -34,7 +34,7 @@ public:
   }
 
   std::pair<std::size_t, std::size_t> span() const {
-    return { start, deriv().len() };
+    return { start, end };
   }
 
   std::size_t line() const {

@@ -48,8 +48,8 @@ public:
 
   std::string str(const std::vector<std::string>& text) const {
     return map([&](const auto& t) {
-      const auto [first, len] = t.span();
-      return text[t.line()].substr(first, len);
+      const auto [first, last] = t.span();
+      return text[t.line()].substr(first, last - first);
     });
   }
 

@@ -115,7 +115,7 @@ TEST_F(TokenTest, IsAllVariantTypes) {
 TEST_F(TokenTest, MapReturnsCorrectType) {
   token t(identifier(0, 0, 4));
   
-  // Map should return a size_t (from span())
+  // Map should return a size_t pair (start, end)
   auto result = t.map([](const auto& tkn) {
     return tkn.span();
   });
@@ -127,14 +127,14 @@ TEST_F(TokenTest, MapReturnsCorrectType) {
 TEST_F(TokenTest, MapPreservesTokenData) {
   token t(text(2, 5, 10));
   
-  auto [line, start, len] = t.map([](const auto& tkn) {
-    const auto [s, len] = tkn.span();
-    return std::make_tuple(tkn.line(), s, len);
+  auto [line, start, end_pos] = t.map([](const auto& tkn) {
+    const auto [s, e] = tkn.span();
+    return std::make_tuple(tkn.line(), s, e);
   });
 
   EXPECT_EQ(line, 2);
   EXPECT_EQ(start, 5);
-  EXPECT_EQ(len, 5);  // text's len() returns end - start = 10 - 5 = 5
+  EXPECT_EQ(end_pos, 10);
 }
 
 TEST_F(TokenTest, MapWithDifferentTokenTypes) {
@@ -146,10 +146,10 @@ TEST_F(TokenTest, MapWithDifferentTokenTypes) {
   };
 
   for (const auto& t : tokens) {
-    auto [start, len] = t.map([](const auto& tkn) {
+    auto [start, end_pos] = t.map([](const auto& tkn) {
       return tkn.span();
     });
-    EXPECT_GE(len, 0);  // Ensure span is valid
+    EXPECT_GE(end_pos, start);  // Ensure end >= start
   }
 }
 
@@ -158,7 +158,7 @@ TEST_F(TokenTest, MapLambdaCapture) {
   int captured_value = 42;
 
   auto result = t.map([captured_value](const auto& tkn) {
-    auto [start, len] = tkn.span();
+    auto [start, end_pos] = tkn.span();
     return start + captured_value;
   });
 
@@ -341,21 +341,22 @@ TEST_F(TokenTest, IsAcceptsAnyNumberOfTypes) {
 // ============================================================================
 
 TEST_F(TokenTest, ZeroLengthToken) {
-  token t(identifier(0, 5, 5));  // Zero-length span
-  auto [start, len] = t.map([](const auto& tkn) {
+  token t(identifier(0, 5, 5));  // Zero-length span (start == end)
+  auto [start, end_pos] = t.map([](const auto& tkn) {
     return tkn.span();
   });
-  EXPECT_EQ(len, 0);
+  EXPECT_EQ(start, 5);
+  EXPECT_EQ(end_pos, 5);
 }
 
 TEST_F(TokenTest, LargePositionValues) {
   // Test with large position values
   token t(text(1000, 5000, 5010));
-  auto [start, len] = t.map([](const auto& tkn) {
+  auto [start, end_pos] = t.map([](const auto& tkn) {
     return tkn.span();
   });
   EXPECT_EQ(start, 5000);
-  EXPECT_EQ(len, 10);  // text's len() returns end - start = 5010 - 5000 = 10
+  EXPECT_EQ(end_pos, 5010);
 }
 
 TEST_F(TokenTest, MapTypeConversion) {
@@ -363,11 +364,11 @@ TEST_F(TokenTest, MapTypeConversion) {
   
   // Map to a different return type
   double result = t.map([](const auto& tkn) -> double {
-    auto [start, len] = tkn.span();
-    return start * 1.5 + len;
+    auto [start, end_pos] = tkn.span();
+    return start * 1.5 + (end_pos - start);
   });
   
-  EXPECT_DOUBLE_EQ(result, 3.5);  // 1 * 1.5 + 3
+  EXPECT_DOUBLE_EQ(result, 3.5);  // 1 * 1.5 + (3 - 1) = 1.5 + 2 = 3.5
 }
 
 TEST_F(TokenTest, MapMutableLambda) {
