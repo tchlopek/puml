@@ -7,6 +7,7 @@ CPMAddPackage(
 
 add_executable(pumltest
   pumltest.cpp
+  tokenizer_test.cpp
 )
 
 target_include_directories(pumltest PRIVATE ${SRC_INCLUDE_DIR})

@@ -19,7 +19,8 @@ public:
     if (str[pos] != ':') {
       return {};
     }
-    return text{ line, pos, str.size() - pos };
+    // store end as exclusive index (end of line)
+    return text{ line, pos, str.size() };
   }
 
   std::size_t len() const {

@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <optional>
 #include <stack>
 
 #include <token/is_token.hpp>

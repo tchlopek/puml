@@ -38,8 +38,8 @@ tkn::range tokenize(const std::vector<std::string>& text) {
     for (std::size_t pos = 0; pos != text[line].length();) {
       if (const auto token = token_creator(text[line], line, pos)) {
         tokens.push_back(*token);
-        pos = token->map([](const auto& t) { return t.span().first; });
-        pos += token->map([](const auto& t) { return t.len(); });
+        // advance to end position (span returns start,end)
+        pos = token->map([](const auto& t) { return t.span().second; });
       } else {
         ++pos;
       }
