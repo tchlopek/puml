@@ -4,7 +4,7 @@
 
 #include "token_kw_base.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class kw_star : public token_kw_base<kw_star> {
 public:

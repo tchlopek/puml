@@ -4,7 +4,7 @@
 
 #include "view.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 template<typename... token_ts>
 bool search(const token_view& tview) noexcept {

@@ -1,7 +1,7 @@
 #include "range.hpp"
 #include "view.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 token_range::token_range(std::vector<token>&& tokens)
   : tokens{ std::move(tokens) } {

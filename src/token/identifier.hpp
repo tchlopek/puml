@@ -7,7 +7,7 @@
 #include "token_base.hpp"
 #include "util/char_op.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class identifier : public token_base<identifier> {
 public:

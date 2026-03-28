@@ -5,7 +5,7 @@
 namespace puml::cst {
 
 struct token {
-  puml::token m_tok;
+  puml::lex::token m_tok;
 };
 
 }

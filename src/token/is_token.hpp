@@ -2,7 +2,7 @@
 
 #include "token.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 template<typename... token_ts>
 struct is_token {

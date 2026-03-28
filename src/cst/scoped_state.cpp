@@ -12,10 +12,10 @@
 
 namespace puml::cst {
 
-result scoped_state::try_make(const token_view& tv) {
+result scoped_state::try_make(const lex::token_view& tv) {
   return all<scoped_state,
-    try_match<tokened<kw_state>>,
-    tokened<identifier>,
+    try_match<tokened<lex::kw_state>>,
+    tokened<lex::identifier>,
     block_stmt>::try_make(tv);
 }
 

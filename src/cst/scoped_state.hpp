@@ -12,7 +12,7 @@ struct scoped_state {
   node m_name_id;
   node m_scope_block;
 
-  static result try_make(const token_view& tv);
+  static result try_make(const lex::token_view& tv);
 };
 
 }

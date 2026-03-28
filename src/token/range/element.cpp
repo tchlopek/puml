@@ -1,6 +1,6 @@
 #include "element.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 token_element::token_element(const token& t, std::size_t index)
   : m_token{ t }

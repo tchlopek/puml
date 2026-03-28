@@ -4,15 +4,15 @@
 #include "range/range.hpp"
 #include "tokenizer.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 namespace {
 
 template<typename token_t, typename... token_ts>
-std::optional<puml::token>
+std::optional<puml::lex::token>
 match_token(const std::string& str, std::size_t line, std::size_t pos) {
   if (const auto token = token_t::try_make(str, line, pos)) {
-    return puml::token{ *token };
+    return puml::lex::token{ *token };
   } else {
     if constexpr (sizeof...(token_ts) > 0) {
       return match_token<token_ts...>(str, line, pos);
@@ -27,7 +27,7 @@ struct make_token;
 
 template<typename... token_ts>
 struct make_token<std::variant<token_ts...>> {
-  std::optional<puml::token>
+  std::optional<puml::lex::token>
   operator()(const std::string& str, std::size_t line, std::size_t pos) const {
     return match_token<token_ts...>(str, line, pos);
   }

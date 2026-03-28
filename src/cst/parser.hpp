@@ -6,6 +6,6 @@
 
 namespace puml::cst {
 
-result parse(const token_view& tokens);
+result parse(const lex::token_view& tokens);
 
 }

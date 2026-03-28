@@ -6,6 +6,7 @@
 #include "token/tokenizer.hpp"
 
 using namespace puml;
+using namespace puml::lex;
 
 static puml::context make_ctx(const std::vector<std::string>& lines) {
   return puml::context{ "", lines };

@@ -16,7 +16,7 @@ auto all_failed() {
 }
 
 template<typename T, typename... Ts>
-auto all(const token_view& tv) {
+auto all(const lex::token_view& tv) {
   auto node = T::try_make(tv);
   if (!node) {
     return std::tuple_cat(std::tuple{ std::move(node) }, all_failed<Ts...>());
@@ -56,7 +56,7 @@ std::size_t get_len(const std::tuple<results...>& res) {
 
 template<typename node_t, typename... Ts>
 struct all {
-  static result try_make(const token_view& tv) {
+  static result try_make(const lex::token_view& tv) {
     auto nodes = detail::all<Ts...>(tv);
     if (auto* const failed = detail::get_failed(nodes)) {
       return std::move(*failed);

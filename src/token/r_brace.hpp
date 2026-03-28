@@ -4,7 +4,7 @@
 
 #include "token_base.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class r_brace : public token_base<r_brace> {
 public:

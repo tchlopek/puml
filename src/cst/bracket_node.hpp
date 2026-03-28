@@ -7,8 +7,8 @@
 namespace puml::cst {
 
 struct bracket_node {
-  puml::token m_lb;
-  puml::token m_rb;
+  puml::lex::token m_lb;
+  puml::lex::token m_rb;
   node m_node;
 };
 

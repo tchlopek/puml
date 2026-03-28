@@ -3,7 +3,7 @@
 #include "token_base.hpp"
 #include "util/char_op.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 template<typename token_t>
 class token_kw_base : public token_base<token_t> {

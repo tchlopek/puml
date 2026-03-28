@@ -11,7 +11,7 @@ struct simple_state {
   node name_id;
   node annonation;
 
-  static result try_make(const token_view& tv);
+  static result try_make(const lex::token_view& tv);
 };
 
 }

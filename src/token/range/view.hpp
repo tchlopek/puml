@@ -6,7 +6,7 @@
 
 #include "range.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class token_element;
 class token_view {

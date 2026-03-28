@@ -10,7 +10,7 @@ class result;
 struct stmt {
   node m_stmt;
 
-  static result try_make(const token_view& tv);
+  static result try_make(const lex::token_view& tv);
 };
 
 }

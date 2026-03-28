@@ -8,7 +8,7 @@
 #include "range.hpp"
 #include "view.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 namespace {
 
@@ -116,7 +116,7 @@ std::optional<token_element> token_view::find_global_right(const token_view::pre
 
 std::optional<token_element> token_view::find_closing_bracket(const token_element& elem) const {
   if (elem.get().is<l_brace>()) {
-    return ::puml::find_closing_bracket<l_brace, r_brace>(*this, elem);
+    return ::puml::lex::find_closing_bracket<l_brace, r_brace>(*this, elem);
   } else {
     return {};
   }

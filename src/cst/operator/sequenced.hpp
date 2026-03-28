@@ -17,7 +17,7 @@ namespace puml::cst {
 template<typename node_t>
 class sequenced {
 public:
-  static result try_make(const token_view& tv) {
+  static result try_make(const lex::token_view& tv) {
     if (tv.size() == 0) {
       return node{ box{ list{ std::vector<node>{} } }, 0 };
     }
@@ -41,13 +41,13 @@ public:
 template<typename node_t, typename sep_t, std::size_t at_least = 0>
 class sequenced_sep {
 public:
-  static result try_make(const token_view& tv) {
+  static result try_make(const lex::token_view& tv) {
     if (tv.size() == 0) {
       return node{ box{ list{ std::vector<node>{} } }, 0 };
     }
     auto tview = tv;
     std::vector<node> seq;
-    while (auto sep = tview.find_global_left(is_token<sep_t>{})) {
+    while (auto sep = tview.find_global_left(lex::is_token<sep_t>{})) {
       if (auto n = node_t::try_make(tview.slice_right(sep->index()))) {
         seq.push_back(n.unwrap());
         tview = tview.slice_left(sep->index() + 1);

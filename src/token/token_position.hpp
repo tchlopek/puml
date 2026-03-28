@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-namespace puml {
+namespace puml::lex {
 
 struct token_position {
   std::size_t line_num;

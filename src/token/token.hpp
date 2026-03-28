@@ -18,7 +18,7 @@
 #include "r_brace.hpp"
 #include "text.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class token {
 public:

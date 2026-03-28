@@ -6,7 +6,7 @@
 
 #include "token_position.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 template<typename token_t>
 class token_base : protected token_position {

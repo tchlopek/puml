@@ -11,10 +11,10 @@
 
 namespace puml::cst {
 
-result simple_state::try_make(const token_view& tv) {
+result simple_state::try_make(const lex::token_view& tv) {
   return all<simple_state,
-    try_match<tokened<identifier>>,
-    try_match<tokened<text>>>::try_make(tv);
+    try_match<tokened<lex::identifier>>,
+    try_match<tokened<lex::text>>>::try_make(tv);
 }
 
 }

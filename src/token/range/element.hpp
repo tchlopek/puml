@@ -2,7 +2,7 @@
 
 #include <token/token.hpp>
 
-namespace puml {
+namespace puml::lex {
 
 class token_element {
 public:

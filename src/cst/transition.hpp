@@ -13,7 +13,7 @@ struct transition {
   node m_target_id;
   node m_text;
 
-  static result try_make(const token_view& tv);
+  static result try_make(const lex::token_view& tv);
 };
 
 }

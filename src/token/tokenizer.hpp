@@ -2,7 +2,7 @@
 
 #include <context.hpp>
 
-namespace puml {
+namespace puml::lex {
 
 class token_range;
 

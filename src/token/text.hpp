@@ -6,7 +6,7 @@
 
 #include "token_base.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class text : public token_base<text> {
 public:

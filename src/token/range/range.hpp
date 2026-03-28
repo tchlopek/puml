@@ -4,7 +4,7 @@
 
 #include <token/token.hpp>
 
-namespace puml {
+namespace puml::lex {
 
 class token_view;
 class token_range {

@@ -8,7 +8,7 @@ namespace puml::cst {
 
 struct error {
   std::string message;
-  token_view tv;
+  lex::token_view tv;
 };
 
 }

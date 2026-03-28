@@ -1,6 +1,6 @@
 #pragma once
 
-namespace puml {
+namespace puml::lex {
 
 class token_view;
 

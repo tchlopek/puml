@@ -8,7 +8,7 @@ namespace puml::cst {
 
 template<typename node_t>
 struct try_match {
-  static result try_make(const token_view& tv) {
+  static result try_make(const lex::token_view& tv) {
     auto n = node_t::try_make(tv);
     return n ? std::move(n) : result{};
   }

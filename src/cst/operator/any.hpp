@@ -11,7 +11,7 @@ namespace puml::cst {
 namespace detail {
 
 template<typename T, typename... Ts>
-result any(const token_view& tv) {
+result any(const lex::token_view& tv) {
   if (auto node = T::try_make(tv); node || node.is_fatal()) {
     return node;
   }
@@ -26,7 +26,7 @@ result any(const token_view& tv) {
 
 template<typename... Ts>
 struct any {
-  static result try_make(const token_view& tv) {
+  static result try_make(const lex::token_view& tv) {
     return detail::any<Ts...>(tv);
   }
 };

@@ -4,7 +4,7 @@
 
 #include "token_kw_base.hpp"
 
-namespace puml {
+namespace puml::lex {
 
 class kw_arrow_double : public token_kw_base<kw_arrow_double> {
 public:

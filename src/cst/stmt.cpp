@@ -12,7 +12,7 @@
 
 namespace puml::cst {
 
-result stmt::try_make(const token_view& tv) {
+result stmt::try_make(const lex::token_view& tv) {
   auto r = any<
     scoped_state,
     simple_state,

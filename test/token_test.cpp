@@ -10,6 +10,7 @@
 #include "token/text.hpp"
 
 using namespace puml;
+using namespace puml::lex;
 
 // Test fixture class for token tests
 class TokenTest : public ::testing::Test {

@@ -14,6 +14,8 @@
 #include "builder.hpp"
 #include "context.hpp"
 
+using namespace puml::lex;
+
 namespace puml {
 
 namespace {

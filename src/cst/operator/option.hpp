@@ -9,7 +9,7 @@ namespace puml::cst {
 
 template<typename node_t>
 struct option {
-  static result try_make(const token_view& tv) {
+  static result try_make(const lex::token_view& tv) {
     if (tv.size() == 0) {
       return node{ box{ null{} }, 0 };
     }
