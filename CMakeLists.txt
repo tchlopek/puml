@@ -6,7 +6,6 @@ project(parser
 
 set(CMAKE_CXX_STANDARD 17)
 
-option(BUILD_EXAMPLE "Enables example project" OFF)
 option(BUILD_TEST "Enables unit-test build" OFF)
 
 set(CPM_DOWNLOAD_VERSION 0.42.0)
@@ -27,8 +26,4 @@ add_subdirectory(src)
 if (BUILD_TEST)
   enable_testing()
   add_subdirectory(test)
-endif()
-
-if (BUILD_EXAMPLE)
-  add_subdirectory(example)
 endif()
