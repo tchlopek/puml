@@ -10,6 +10,7 @@
 #include "cst/parser.hpp"
 #include "cst/operator/result.hpp"
 #include "token/range/range.hpp"
+#include "token/result.hpp"
 #include "token/tokenizer.hpp"
 #include "builder.hpp"
 #include "context.hpp"
@@ -61,7 +62,11 @@ diagram parse(const std::filesystem::path& filepath) {
   try {
     const auto ctx = load_file(filepath);
     const auto tokens = tokenize(ctx);
-    auto syntax_tree = cst::parse(token_view{ tokens });
+    if (!tokens) {
+      return diagram{ { tokens.get_error() } };
+    }
+
+    auto syntax_tree = cst::parse(token_view{ tokens.get_range() });
     return syntax_tree ?
       build(syntax_tree.unwrap(), ctx) :
       diagram{ get_errors(syntax_tree) };
@@ -76,7 +81,11 @@ diagram parse(const std::string& string) {
   try {
     const auto ctx = load_string(string);
     const auto tokens = tokenize(ctx);
-    auto syntax_tree = cst::parse(token_view{ tokens });
+    if (!tokens) {
+      return diagram{ { tokens.get_error() } };
+    }
+
+    auto syntax_tree = cst::parse(token_view{ tokens.get_range() });
     return syntax_tree ?
       build(syntax_tree.unwrap(), ctx) :
       diagram{ get_errors(syntax_tree) };

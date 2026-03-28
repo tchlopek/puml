@@ -4,8 +4,8 @@
 
 namespace puml::lex {
 
-class token_range;
+class result;
 
-token_range tokenize(const puml::context& ctx);
+result tokenize(const puml::context& ctx);
 
 }
