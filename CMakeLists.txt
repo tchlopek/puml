@@ -2,9 +2,9 @@
 # Copyright (c) 2026 Tomasz Chłopek
 
 cmake_minimum_required(VERSION 3.13)
-project(parser
+project(puml-parser
   VERSION 0.1.0
-  DESCRIPTION "X lang parser"
+  DESCRIPTION "PlantUML state diagram parser"
   LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
