@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Tomasz Chłopek
+
 cmake_minimum_required(VERSION 3.13)
 project(parser
   VERSION 0.1.0

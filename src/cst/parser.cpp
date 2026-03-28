@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Tomasz Chłopek
+
 #include <token/range/view.hpp>
 
 #include "operator/sequenced.hpp"

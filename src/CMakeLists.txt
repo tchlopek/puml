@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Tomasz Chłopek
+
 add_library(puml)
 
 if (BUILD_SHARED_LIBS)

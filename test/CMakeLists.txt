@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Tomasz Chłopek
+
 CPMAddPackage(
   NAME googletest
   URL https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip

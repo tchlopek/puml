@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Tomasz Chłopek
+
 #include <token/range/view.hpp>
 #include <token/identifier.hpp>
 #include <token/kw_arrow_double.hpp>

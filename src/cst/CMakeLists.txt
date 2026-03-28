@@ -8,4 +8,7 @@ target_sources(puml PRIVATE
   transition.cpp
 )
 
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Tomasz Chłopek
+
 add_subdirectory(operator)
