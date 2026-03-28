@@ -14,6 +14,7 @@ public:
 
   const std::vector<std::string>& get_text() const;
   const std::string& get_line(std::size_t lineno) const;
+  const std::filesystem::path& get_filepath() const;
 
 private:
   std::filesystem::path m_filepath;

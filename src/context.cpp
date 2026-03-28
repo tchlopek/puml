@@ -17,4 +17,8 @@ const std::string& context::get_line(std::size_t lineno) const {
   return m_lines[lineno];
 }
 
+const std::filesystem::path& context::get_filepath() const {
+  return m_filepath;
+}
+
 }

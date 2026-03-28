@@ -47,11 +47,27 @@ context load_string(const std::string& string) {
   return context{ "", lines };
 }
 
-std::vector<std::string> get_errors(const cst::result& r) {
+std::size_t get_line(const lex::token_view& tv) {
+  return tv.begin()->map([](const auto& t){ return t.line(); }) + 1;
+}
+
+std::size_t get_column(const lex::token_view& tv) {
+  return tv.begin()->map([](const auto& t){ return t.span().first; }) + 1;
+}
+
+std::vector<std::string> get_errors(const cst::result& r, const context& ctx) {
   auto vec = std::vector<std::string>{};
   vec.reserve(r.get_errors().size());
   for (const auto& e : r.get_errors()) {
-    vec.push_back(e.message);
+    const auto line = get_line(e.tv);
+    const auto column = get_column(e.tv);
+
+    auto msg = ctx.get_filepath().filename().string() +
+    ":" + std::to_string(line) +
+    ":" + std::to_string(column) +
+    ": " + e.message;
+
+    vec.push_back(std::move(msg));
   }
   return vec;
 }
@@ -69,7 +85,7 @@ diagram parse(const std::filesystem::path& filepath) {
     auto syntax_tree = cst::parse(token_view{ tokens.get_range() });
     return syntax_tree ?
       build(syntax_tree.unwrap(), ctx) :
-      diagram{ get_errors(syntax_tree) };
+      diagram{ get_errors(syntax_tree, ctx) };
   } catch (const std::exception& e) {
     return diagram {
       { "Unable to parse " + filepath.string() + " due to: " + e.what() }
@@ -88,7 +104,7 @@ diagram parse(const std::string& string) {
     auto syntax_tree = cst::parse(token_view{ tokens.get_range() });
     return syntax_tree ?
       build(syntax_tree.unwrap(), ctx) :
-      diagram{ get_errors(syntax_tree) };
+      diagram{ get_errors(syntax_tree, ctx) };
   } catch (const std::exception& e) {
     return diagram {
       { std::string{ "Unable to parse puml due to: " } + e.what() }
