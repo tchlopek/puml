@@ -5,7 +5,11 @@
 #include "token/token.hpp"
 #include "token/tokenizer.hpp"
 
-using namespace tkn;
+using namespace puml;
+
+static puml::context make_ctx(const std::vector<std::string>& lines) {
+  return puml::context{ "", lines };
+}
 
 // ============================================================================
 // Tokenizer Tests (moved from pumltest.cpp)
@@ -16,13 +20,13 @@ class TokenizerTest : public ::testing::Test {
 
 TEST_F(TokenizerTest, EmptyInput) {
   std::vector<std::string> lines;
-  auto r = tokenize(lines);
+  auto r = tokenize(make_ctx(lines));
   EXPECT_EQ(r.size(), 0);
 }
 
 TEST_F(TokenizerTest, SingleIdentifier) {
   std::vector<std::string> lines{"foo"};
-  auto r = tokenize(lines);
+  auto r = tokenize(make_ctx(lines));
   EXPECT_EQ(r.size(), 1);
   auto it = r.begin();
   EXPECT_EQ(it->name(), "identifier");
@@ -30,14 +34,14 @@ TEST_F(TokenizerTest, SingleIdentifier) {
 }
 
 TEST_F(TokenizerTest, MixedTokens) {
-  std::vector<std::string> lines{"foo -> bar --> baz { } : textdata"};
-  auto r = tokenize(lines);
+  std::vector<std::string> lines{"foo -> bar . --> baz { } : textdata"};
+  auto r = tokenize(make_ctx(lines));
   
   std::vector<std::string> expected_strs = {
-    "foo", "->", "bar", "-->", "baz", "{", "}", ": textdata"
+    "foo", "->", "bar", ".", "-->", "baz", "{", "}", ": textdata"
   };
   std::vector<std::string> expected_names = {
-    "identifier", "->", "identifier", "-->", "identifier", "{", "}", "text"
+    "identifier", "->", "identifier", ".", "-->", "identifier", "{", "}", "text"
   };
   
   EXPECT_EQ(r.size(), expected_strs.size());
@@ -50,7 +54,7 @@ TEST_F(TokenizerTest, MixedTokens) {
 
 TEST_F(TokenizerTest, MultiLine) {
   std::vector<std::string> lines{"alpha", "beta"};
-  auto r = tokenize(lines);
+  auto r = tokenize(make_ctx(lines));
   EXPECT_EQ(r.size(), 2);
   auto it = r.begin();
   EXPECT_EQ(it->str(lines), "alpha");

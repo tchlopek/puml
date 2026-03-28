@@ -6,7 +6,8 @@ CPMAddPackage(
 )
 
 add_executable(pumltest
-  pumltest.cpp
+  parser_test.cpp
+  token_test.cpp
   tokenizer_test.cpp
 )
 
