@@ -1,4 +1,3 @@
-#include "context.hpp"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
@@ -13,10 +12,6 @@
 #include <puml/puml.hpp>
 
 #include "diagram_matchers.hpp"
-
-static puml::context make_ctx(const std::vector<std::string>& lines) {
-  return puml::context{ "", lines };
-}
 
 TEST(ParserTest, SimpleState) {
   std::string str = "foo : asdasd";

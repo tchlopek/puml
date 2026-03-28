@@ -6,10 +6,11 @@
 
 #include "state.hpp"
 #include "transition.hpp"
+#include "api.hpp"
 
 namespace puml {
 
-class diagram {
+class PUML_API diagram {
 public:
   explicit diagram(std::vector<std::string>&& errors);
 
@@ -32,7 +33,7 @@ private:
   std::vector<std::string> m_errors;
 };
 
-diagram parse(const std::filesystem::path& filepath);
-diagram parse(const std::string& string);
+PUML_API diagram parse(const std::filesystem::path& filepath);
+PUML_API diagram parse(const std::string& string);
 
 }

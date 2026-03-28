@@ -9,7 +9,7 @@
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/install/${presetName}",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": "OFF",
+        "BUILD_SHARED_LIBS": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CPM_SOURCE_CACHE": "${sourceDir}/build/.deps-cache"
       }
