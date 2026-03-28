@@ -17,10 +17,10 @@ set_target_properties(puml
 
 target_include_directories(puml
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
   PRIVATE
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
 )
 
 add_subdirectory(cst)
