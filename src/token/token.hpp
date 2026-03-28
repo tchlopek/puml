@@ -12,7 +12,9 @@
 #include "kw_arrow_right.hpp"
 #include "kw_arrow_single.hpp"
 #include "kw_arrow_up.hpp"
+#include "kw_enduml.hpp"
 #include "kw_star.hpp"
+#include "kw_startuml.hpp"
 #include "kw_state.hpp"
 #include "l_brace.hpp"
 #include "r_brace.hpp"
@@ -30,7 +32,9 @@ public:
     kw_arrow_right,
     kw_arrow_single,
     kw_arrow_up,
+    kw_enduml,
     kw_star,
+    kw_startuml,
     kw_state,
     l_brace,
     r_brace,

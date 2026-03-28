@@ -14,6 +14,8 @@ namespace puml::cst {
 
 result stmt::try_make(const lex::token_view& tv) {
   auto r = any<
+    startuml_stmt,
+    enduml_stmt,
     scoped_state,
     simple_state,
     transition_init,

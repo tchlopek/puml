@@ -82,6 +82,8 @@ TEST(ParserTest, SimpleTransitionWithText) {
 
 TEST(ParserTest, ScopedStateWithTransitionInside) {
   std::string str = R"a(
+@startuml
+
 [*] --> NotShooting
 
 state NotShooting {
@@ -101,6 +103,8 @@ state Configuring {
   }
 
 }
+
+@enduml
   )a";
 
   auto diagram = puml::parse(str);
