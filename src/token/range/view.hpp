@@ -32,6 +32,7 @@ public:
   std::size_t size() const;
   iterator begin() const;
   iterator end() const;
+  std::string get_line_string(const std::vector<std::string>& text) const;
 
 private:
   token_view(const token_range*, std::size_t, std::size_t);

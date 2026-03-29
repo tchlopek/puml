@@ -20,7 +20,8 @@ public:
   diagram(
     std::vector<std::unique_ptr<state>>&& states,
     std::vector<transition>&& transitions,
-    std::vector<transition>&& init_transitions);
+    std::vector<transition>&& init_transitions,
+    std::string&& title);
 
   operator bool() const;
 
@@ -28,12 +29,14 @@ public:
   const std::vector<transition>& get_transition() const;
   const std::vector<transition>& get_init_transitions() const;
   const std::vector<std::string>& get_errors() const;
+  const std::string& get_title() const;
 
 private:
   std::vector<std::unique_ptr<state>> m_states;
   std::vector<transition> m_transitions;
   std::vector<transition> m_init_transitions;
   std::vector<std::string> m_errors;
+  std::string m_title;
 };
 
 PUML_API diagram parse(const std::filesystem::path& filepath);

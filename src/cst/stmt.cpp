@@ -9,6 +9,7 @@
 #include "scoped_state.hpp"
 #include "simple_state.hpp"
 #include "stmt.hpp"
+#include "title.hpp"
 #include "transition_init.hpp"
 #include "transition.hpp"
 #include "types.hpp"
@@ -21,6 +22,7 @@ result stmt::try_make(const lex::token_view& tv) {
     enduml_stmt,
     scoped_state,
     simple_state,
+    title,
     transition_init,
     transition,
     block_stmt_quiet>::try_make(tv);

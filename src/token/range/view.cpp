@@ -155,6 +155,26 @@ token_view::iterator token_view::end() const {
   return range_ptr->begin() + last;
 }
 
+std::string token_view::get_line_string(const std::vector<std::string>& text) const {
+  auto line = std::string{};
+
+  if (size() == 0) {
+    return line;
+  }
+
+  const auto span_fn = [](const auto& t){ return t.span(); };
+  auto prev_end = begin()->map(span_fn).second;
+  line = begin()->str(text);
+
+  for (auto it = std::next(begin()); it != end(); ++it) {
+    const auto span = it->map(span_fn);
+    line += std::string(span.first - prev_end, ' ') + it->str(text);
+    prev_end = span.second;
+  }
+
+  return line;
+}
+
 bool token_view::in_range(std::size_t index) const {
   return index >= first && index < last;
 }

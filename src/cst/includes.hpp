@@ -9,6 +9,7 @@
 #include "null.hpp"
 #include "scoped_state.hpp"
 #include "simple_state.hpp"
+#include "title.hpp"
 #include "token.hpp"
 #include "transition_init.hpp"
 #include "transition.hpp"

@@ -4,6 +4,7 @@ target_sources(puml PRIVATE
   scoped_state.cpp
   simple_state.cpp
   stmt.cpp
+  title.cpp
   transition_init.cpp
   transition.cpp
 )

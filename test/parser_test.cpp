@@ -106,4 +106,24 @@ state Configuring {
   )a";
 
   auto diagram = puml::parse(str);
+  EXPECT_THAT(diagram.get_errors(), testing::IsEmpty());
+}
+
+TEST(ParserTest, HasTitle) {
+  std::string str = R"a(
+@startuml
+
+title some title text
+
+[*] --> S1
+
+state S1 {
+}
+
+@enduml
+  )a";
+
+  auto diagram = puml::parse(str);
+  EXPECT_THAT(diagram.get_errors(), testing::IsEmpty());
+  EXPECT_EQ(diagram.get_title(), "some title text");
 }

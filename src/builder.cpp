@@ -23,6 +23,7 @@ struct cst_context {
   std::unordered_map<std::string, std::unique_ptr<::puml::state>> state_map;
   std::vector<::puml::transition> transitions;
   std::vector<::puml::transition> init_transitions;
+  std::string title;
 
   diagram make_diagram() {
     auto diagram_states = std::vector<std::unique_ptr<::puml::state>>{};
@@ -35,7 +36,8 @@ struct cst_context {
     return diagram{
       std::move(diagram_states),
       std::move(transitions),
-      std::move(init_transitions)
+      std::move(init_transitions),
+      std::move(title)
     };
   }
 };
@@ -95,6 +97,10 @@ public:
   }
 
   void operator()(const box<::puml::cst::transition>& transition) {
+  }
+
+  void operator()(const box<::puml::cst::title>& token) const {
+    m_cst_ctx.title = token->title_strings.get_line_string(m_ctx.get_text());
   }
 
   void operator()(const box<::puml::cst::token>& token) const {
@@ -202,6 +208,9 @@ public:
     }
 
     m_cst_ctx.transitions.push_back(::puml::transition{ src_ptr.get(), dst_ptr.get(), name });
+  }
+
+  void operator()(const box<::puml::cst::title>& token) const {
   }
 
   void operator()(const box<::puml::cst::token>& token) const {

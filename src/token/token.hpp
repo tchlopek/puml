@@ -19,6 +19,7 @@
 #include "kw_star.hpp"
 #include "kw_startuml.hpp"
 #include "kw_state.hpp"
+#include "kw_title.hpp"
 #include "l_brace.hpp"
 #include "r_brace.hpp"
 #include "text.hpp"
@@ -39,6 +40,7 @@ public:
     kw_star,
     kw_startuml,
     kw_state,
+    kw_title,
     l_brace,
     r_brace,
     text,

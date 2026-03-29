@@ -11,9 +11,10 @@ struct list;
 struct null;
 struct scoped_state;
 struct simple_state;
+struct title;
+struct token;
 struct transition_init;
 struct transition;
-struct token;
 
 class node {
   using storage_t = std::variant<
@@ -22,9 +23,10 @@ class node {
     box<null>,
     box<scoped_state>,
     box<simple_state>,
+    box<title>,
+    box<token>,
     box<transition_init>,
-    box<transition>,
-    box<token>>;
+    box<transition>>;
 
 public:
   explicit node(storage_t, std::size_t);
