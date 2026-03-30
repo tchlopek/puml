@@ -4,6 +4,7 @@
 #pragma once
 
 #include <filesystem>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -32,11 +33,11 @@ public:
   const std::string& get_title() const;
 
 private:
-  std::vector<std::unique_ptr<state>> m_states;
-  std::vector<transition> m_transitions;
-  std::vector<transition> m_init_transitions;
-  std::vector<std::string> m_errors;
-  std::string m_title;
+  diagram();
+
+  struct _diagram;
+  struct _diagram_deleter{ void operator()(_diagram*) const; };
+  std::unique_ptr<_diagram, _diagram_deleter> m_pimpl;
 };
 
 PUML_API diagram parse(const std::filesystem::path& filepath);

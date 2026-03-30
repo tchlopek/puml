@@ -15,7 +15,7 @@ class box : private std::unique_ptr<T> {
   friend class box;
 
 public:
-  using typename base_t::unique_ptr;
+  using std::unique_ptr<T>::unique_ptr;
 
   box(std::nullptr_t) = delete;
   box() = delete;
