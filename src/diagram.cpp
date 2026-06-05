@@ -13,12 +13,14 @@ struct diagram::_diagram {
   std::string title;
 };
 
-void diagram::_diagram_deleter::operator()(_diagram* ptr) const {
-  std::default_delete<_diagram>{}(ptr);
-}
+diagram::diagram(diagram&&) noexcept = default;
+
+diagram& diagram::operator=(diagram&&) noexcept = default;
+
+diagram::~diagram() = default;
 
 diagram::diagram()
-  : m_pimpl{ std::unique_ptr<_diagram, _diagram_deleter>{ new _diagram{} } }
+  : m_pimpl{ std::unique_ptr<_diagram>{ new _diagram{} } }
 {}
 
 diagram::diagram(std::vector<std::string>&& errors)

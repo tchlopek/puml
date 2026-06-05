@@ -24,6 +24,12 @@ public:
     std::vector<transition>&& init_transitions,
     std::string&& title);
 
+  diagram(const diagram&) = delete;
+  diagram(diagram&&) noexcept;
+  diagram& operator=(const diagram&) = delete;
+  diagram& operator=(diagram&&) noexcept;
+  ~diagram();
+
   operator bool() const;
 
   const std::vector<std::unique_ptr<state>>& get_states() const;
@@ -36,8 +42,7 @@ private:
   diagram();
 
   struct _diagram;
-  struct _diagram_deleter{ void operator()(_diagram*) const; };
-  std::unique_ptr<_diagram, _diagram_deleter> m_pimpl;
+  std::unique_ptr<_diagram> m_pimpl;
 };
 
 PUML_API diagram parse(const std::filesystem::path& filepath);
